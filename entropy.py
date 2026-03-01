@@ -1,9 +1,8 @@
 import os
 
+
 def generate_entropy():
-    """
-    Generate 256 bits of cryptographically secure random entropy.
-    Uses the operating system's secure random number generator (CSPRNG).
-    This is the starting point for all wallet key generation.
-    """
+    # Pull 32 bytes (256 bits) from the OS random source.
+    # On Linux/Pi this reads from /dev/urandom which is seeded
+    # by hardware events, so it is safe to use for key material.
     return os.urandom(32)
