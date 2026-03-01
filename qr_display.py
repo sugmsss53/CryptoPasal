@@ -1,14 +1,9 @@
 import qrcode
 
-def generate_qr(data: str, title: str = "QR CODE"):
-    """
-    Generate and print a QR code directly in the terminal using ASCII.
-    Works perfectly over SSH — no display or monitor needed.
-    Useful for showing wallet address so others can scan and send ETH.
 
-    Uses Reed-Solomon error correction (QR standard).
-    This is also a data encoding concept relevant to cryptography.
-    """
+def generate_qr(data: str, title: str = "QR CODE"):
+    # Print an ASCII QR code straight to the terminal.
+    # Works over SSH with no display attached — useful on a headless Pi.
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -18,10 +13,10 @@ def generate_qr(data: str, title: str = "QR CODE"):
     qr.add_data(data)
     qr.make(fit=True)
 
-    print("\n" + "=" * 44)
+    print("\n" + "=" * 46)
     print(f"  {title}")
-    print("=" * 44)
+    print("=" * 46)
     qr.print_ascii(invert=True)
-    print("=" * 44)
+    print("=" * 46)
     print(f"  {data}")
-    print("=" * 44 + "\n")
+    print("=" * 46 + "\n")
