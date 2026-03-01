@@ -1,0 +1,8 @@
+cryptography
+mnemonic
+ecdsa
+eth-utils
+eth-keys
+eth-account
+web3
+qrcode
