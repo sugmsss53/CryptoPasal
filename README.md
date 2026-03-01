@@ -23,7 +23,7 @@ An open-source, air-gapped Ethereum hardware wallet simulator built in Python. S
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/CryptoPasal.git
+git clone https://github.com/sugmsss53/CryptoPasal.git
 cd CryptoPasal
 pip install -r requirements.txt
 python main.py
@@ -43,7 +43,7 @@ sudo apt install git python3-pip -y
 
 **3. Clone and install**
 ```bash
-git clone https://github.com/YOUR_USERNAME/CryptoPasal.git
+git clone https://github.com/sugmsss53/CryptoPasal.git
 cd CryptoPasal
 pip3 install -r requirements.txt --break-system-packages
 ```
