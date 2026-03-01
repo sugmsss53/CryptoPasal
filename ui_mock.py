@@ -1,50 +1,46 @@
+W = 34  
+
+
+def _box_line(content=""):
+    return "|" + content.ljust(W) + "|"
+
+
 def confirm_transaction(amount, to_address):
-    """
-    Simulates an OLED screen confirmation dialog in the terminal.
-    On a real hardware wallet this would be a physical screen + buttons.
-    Returns True if user confirms, False if rejected.
-    """
-    oled_width = 32
-    print("\n+" + "-" * oled_width + "+")
-    print("|" + " CONFIRM TRANSACTION ".center(oled_width) + "|")
-    print("|" + " " * oled_width + "|")
-    print("|" + f"TO:".ljust(oled_width) + "|")
-    print("|" + f"  {to_address[:28]}".ljust(oled_width) + "|")
-    print("|" + f"  {to_address[28:]}".ljust(oled_width) + "|")
-    print("|" + " " * oled_width + "|")
-    print("|" + f"AMOUNT: {amount} ETH".ljust(oled_width) + "|")
-    print("|" + " " * oled_width + "|")
-    print("|" + "Y = Confirm    N = Reject".center(oled_width) + "|")
-    print("+" + "-" * oled_width + "+\n")
+    # Mimics the confirmation screen on a physical hardware wallet.
+    # The user must explicitly press Y before anything gets signed.
+    print("\n+" + "-" * W + "+")
+    print(_box_line(" CONFIRM TRANSACTION"))
+    print(_box_line())
+    print(_box_line(" To:"))
+    print(_box_line("  " + to_address[:W - 2]))
+    print(_box_line("  " + to_address[W - 2:]))
+    print(_box_line())
+    print(_box_line(f" Amount : {amount} ETH (simulated)"))
+    print(_box_line())
+    print("|" + "  Y = Confirm    N = Reject  ".center(W) + "|")
+    print("+" + "-" * W + "+\n")
 
     while True:
-        choice = input("Press Y to confirm, N to reject: ").strip().lower()
+        choice = input("Confirm? (Y/N): ").strip().lower()
         if choice == "y":
             return True
-        elif choice == "n":
+        if choice == "n":
             return False
-        else:
-            print("Invalid input. Press Y or N only.")
+        print("Enter Y or N.")
+
 
 def display_message(message):
-    """Display a single message in OLED style box."""
-    oled_width = 32
-    print("\n+" + "-" * oled_width + "+")
-    print("|" + message.center(oled_width) + "|")
-    print("+" + "-" * oled_width + "+\n")
+    print("\n+" + "-" * W + "+")
+    print(_box_line(" " + message))
+    print("+" + "-" * W + "+\n")
+
 
 def display_wallet_info(address, balance):
-    """
-    Display wallet address and balance in OLED style.
-    Address is split across two lines to fit the display width.
-    """
-    oled_width = 32
-    print("\n+" + "-" * oled_width + "+")
-    print("|" + " WALLET INFO ".center(oled_width) + "|")
-    print("|" + " " * oled_width + "|")
-    print("|" + "Address:".ljust(oled_width) + "|")
-    print("|" + f"  {address[:20]}".ljust(oled_width) + "|")
-    print("|" + f"  {address[20:]}".ljust(oled_width) + "|")
-    print("|" + " " * oled_width + "|")
-    print("|" + f"Balance: {balance} ETH".ljust(oled_width) + "|")
-    print("+" + "-" * oled_width + "+\n")
+    print("\n+" + "-" * W + "+")
+    print(_box_line(" WALLET"))
+    print(_box_line())
+    print(_box_line(" " + address[:W - 1]))
+    print(_box_line(" " + address[W - 1:]))
+    print(_box_line())
+    print(_box_line(f" Balance : {balance} ETH (simulated)"))
+    print("+" + "-" * W + "+\n")
