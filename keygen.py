@@ -1,19 +1,16 @@
-from eth_keys import keys
 import hashlib
+from eth_keys import keys
+
 
 def generate_private_key(seed):
-    """
-    Derive a private key from the BIP-39 seed.
-    Uses SHA-256 to compress the 64-byte seed into a 32-byte private key.
-    The private key is a 256-bit number on the secp256k1 elliptic curve.
-    """
+    # The secp256k1 private key must be exactly 32 bytes.
+    # SHA-256 the 64-byte PBKDF2 seed to bring it down to size.
     hashed = hashlib.sha256(seed).digest()
     return keys.PrivateKey(hashed)
 
+
 def get_public_key(private_key):
-    """
-    Derive the public key from the private key.
-    Uses elliptic curve multiplication on secp256k1.
-    Safe to share — mathematically impossible to reverse back to private key.
-    """
+    # Public key is derived by multiplying the private key scalar
+    # by the secp256k1 generator point G. There is no known way
+    # to reverse this and recover the private key.
     return private_key.public_key
